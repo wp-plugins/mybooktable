@@ -1,0 +1,1 @@
+<h1 itemprop="name" class="mbt-book-title entry-title"><?php the_title(); ?></h1>

@@ -1,0 +1,316 @@
+
+/*---------------------------------------------------------*/
+/* Metaboxes                                               */
+/*---------------------------------------------------------*/
+
+.mbt_metadata_metabox th {
+	width:18%;
+	font-weight: bold;
+}
+
+.mbt_seo_metabox th {
+	width:18%;
+	font-weight: bold;
+}
+
+.mbt_seo_metabox #mbt_seo_title-length,
+.mbt_seo_metabox #mbt_seo_metadesc-length {
+	color: green;
+	font-weight: bold;
+}
+
+.mbt_seo_metabox #mbt_seo_title-length.bad,
+.mbt_seo_metabox #mbt_seo_metadesc-length.bad {
+	color: red;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor {
+	border: 1px solid #DFDFDF;
+	border-radius: 5px;
+	margin: 5px;
+	background: #F5F5F5;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_editor_header {
+	background: #ececec;
+	border-radius: 5px 5px 0px 0px;
+	padding: 5px;
+	cursor: move;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_title {
+	margin: 5px;
+	font-size: 14px;
+	display: inline-block;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_remover {
+	float: right;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_editor_fields {
+	padding: 5px;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_display_selector {
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_display_selector.display_featured {
+	background: url('../images/display_featured.png');
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_display_selector.display_book_only {
+	background: url('../images/display_book_only.png');
+}
+
+#mbt_buybuttons .mbt_buybutton_editor .mbt_buybutton_display_selector.display_text_only {
+	background: url('../images/display_text_only.png');
+}
+
+#mbt_buybuttons .error_message {
+	font-weight: bold;
+	color: red;
+}
+
+#mbt_buybuttons .success_message {
+	font-weight: bold;
+	color: green;
+}
+
+/*---------------------------------------------------------*/
+/* Landing Page                                            */
+/*---------------------------------------------------------*/
+
+.mbt-landing-page .welcome-video-container {
+	text-align: center;
+}
+
+.mbt-landing-page .welcome-video {
+	display: inline-block;
+	text-align: center;
+}
+
+
+.mbt-landing-page .buttons-container {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mbt-landing-page .buttons-container .add-new-book {
+	font-family: Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 16px!important;
+	line-height: 16px!important;
+	vertical-align: middle;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+	border: 1px solid #21759B;
+	border-bottom-color: #1E6A8D;
+	border-radius: 5px;
+	background-color: #21759B;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#2a95c5),to(#21759b));
+	background-image: -webkit-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -moz-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -ms-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -o-linear-gradient(top,#2a95c5,#21759b);
+	background-image: linear-gradient(to bottom,#2a95c5,#21759b);
+	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+	box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+
+	display: inline-block;
+	margin: 0;
+	padding: 6px 15px;
+
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	cursor: pointer;
+}
+
+.mbt-landing-page .buttons-container .add-new-book:active {
+	background-color: #278AB7;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#2e9fd2),to(#21759b));
+	background-image: -webkit-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -moz-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -ms-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -o-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: linear-gradient(to bottom,#2e9fd2,#21759b);
+	border-color: #1B607F;
+	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+	box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+	opacity: 1;
+	-webkit-transition-duration: .3s;
+}
+
+.mbt-landing-page .metabox-holder .postbox {
+	width: 40%;
+	float: left;
+	margin: 0px 10px 10px 0px;
+}
+
+.mbt-landing-page .metabox-holder #mbt_dashboard_upsell .inside {
+	text-align: center;
+	padding: 15px 10px;
+}
+
+.mbt-landing-page .metabox-holder #mbt_dashboard_upsell .inside ul {
+	list-style-type: circle;
+	list-style-position: inside;
+	font-weight: bold;
+}
+
+.mbt-landing-page .metabox-holder #mbt_dashboard_upsell .inside .currently-using {
+	line-height: 1.2;
+}
+
+.mbt-landing-page .metabox-holder #mbt_dashboard_upsell .inside .current-version {
+	color: #21759b;
+}
+
+.mbt-landing-page .metabox-holder #mbt_dashboard_upsell .inside .thank-you {
+	padding: 15px 0px 10px 0
+}
+
+/*---------------------------------------------------------*/
+/* Settings Pages                                          */
+/*---------------------------------------------------------*/
+
+#icon-mbt_landing_page {
+	background-image: url('../images/edit.png');
+}
+
+.mbt_settings th {
+	width:18%;
+	font-weight: bold;
+}
+
+.mbt_settings .mbt_api_key_feedback .key_valid {
+	display: inline-block;
+	padding-bottom: 8px;
+	background: url('../images/tick.png') 0px 2px no-repeat;
+	padding-left: 20px;
+	color: #5FA556;
+}
+
+.mbt_settings .mbt_api_key_feedback .key_invalid {
+	display: inline-block;
+	padding-bottom: 8px;
+	background: url('../images/exclamation.png') 0px 2px no-repeat;
+	padding-left: 20px;
+	color: #E66455;
+}
+
+/*---------------------------------------------------------*/
+/* Taxonomy Pages                                          */
+/*---------------------------------------------------------*/
+
+#mbt_tax_image_url {
+	width: 50%;
+}
+
+#mbt_upload_tax_image_button {
+	width: 80px;
+}
+
+/*---------------------------------------------------------*/
+/* Install Messages                                        */
+/*---------------------------------------------------------*/
+
+.mbt-install-message {
+	position: relative;
+	z-index: 100;
+	border: 1px solid #21759b;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
+	-moz-box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
+	box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
+	background: #2a95c5;
+	display: inline-block;
+
+	padding-right: 10px;
+	margin: 5px 10px 2px;
+	overflow: hidden;
+}
+
+.mbt-install-message h4 {
+	font-size: 18px;
+	font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",Verdana,"Bitstream Vera Sans",sans-serif;
+	font-weight: normal;
+	line-height: 36px;
+	text-shadow: 0 1px 1px #21759b;
+	color: white;
+	vertical-align: middle;
+
+	display: inline-block;
+	margin: 6px 5px 6px 10px;
+	float: left;
+
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.mbt-install-message .install-button {
+	font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",Verdana,"Bitstream Vera Sans",sans-serif;
+	font-weight: bold;
+	font-size: 16px!important;
+	line-height: 16px!important;
+	vertical-align: middle;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+	border: 1px solid #21759B;
+	border-bottom-color: #1E6A8D;
+	border-radius: 5px;
+	background-color: #21759B;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#2a95c5),to(#21759b));
+	background-image: -webkit-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -moz-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -ms-linear-gradient(top,#2a95c5,#21759b);
+	background-image: -o-linear-gradient(top,#2a95c5,#21759b);
+	background-image: linear-gradient(to bottom,#2a95c5,#21759b);
+	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+	box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+
+	display: inline-block;
+	margin: 10px 0px 10px 7px;
+	padding: 6px 15px;
+
+	-webkit-transition-duration: .3s;
+	-moz-transition-duration: .3s;
+	cursor: pointer;
+}
+
+.mbt-install-message .install-button.secondary {
+	opacity: .5;
+}
+
+.mbt-install-message .install-button:hover, .mbt-install-message .install-button:active {
+	background-color: #278AB7;
+	background-image: -webkit-gradient(linear,left top,left bottom,from(#2e9fd2),to(#21759b));
+	background-image: -webkit-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -moz-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -ms-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: -o-linear-gradient(top,#2e9fd2,#21759b);
+	background-image: linear-gradient(to bottom,#2e9fd2,#21759b);
+	border-color: #1B607F;
+	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+	box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+
+	opacity: 1;
+	-webkit-transition-duration: .3s;
+}
