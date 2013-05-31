@@ -153,9 +153,9 @@ function mbt_add_image_size_css() {
 	if(mbt_is_mbt_page()) {
 		$image_size = mbt_get_setting('image_size');
 		echo('<style type="text/css">');
-		if($image_size == 'small') { echo('.mbt_book .mbt-book-images { width: 15%; } .mbt_book .mbt-book-right { width: 85%; } '); }
-		else if($image_size == 'large') { echo('.mbt_book .mbt-book-images { width: 35%; } .mbt_book .mbt-book-right { width: 65%; } '); }
-		else { echo('.mbt_book .mbt-book-images { width: 25%; } .mbt_book .mbt-book-right { width: 75%; } '); }
+		if($image_size == 'small') { echo('.mbt_page .mbt_book .mbt-book-images { width: 15%; } .mbt_page .mbt_book .mbt-book-right { width: 85%; } '); }
+		else if($image_size == 'large') { echo('.mbt_page .mbt_book .mbt-book-images { width: 35%; } .mbt_page .mbt_book .mbt-book-right { width: 65%; } '); }
+		else { echo('.mbt_page .mbt_book .mbt-book-images { width: 25%; } .mbt_page .mbt_book .mbt-book-right { width: 75%; } '); }
 		echo('</style>');
 	}
 }
@@ -237,7 +237,10 @@ function mbt_book_archive_image() {
 
 function mbt_get_book_archive_title() {
 	$output = '';
-	if(is_post_type_archive('mbt_book')) {
+	if(mbt_is_booktable_page()) {
+		$booktable_page = get_post(mbt_get_setting('booktable_page'));
+		$output .= $booktable_page->post_title;
+	} else if(is_post_type_archive('mbt_book')) {
 		$output .= 'Books';
 	} else if(is_tax('mbt_author')) {
 		$output .= 'Author: '.get_queried_object()->name;
@@ -245,8 +248,6 @@ function mbt_get_book_archive_title() {
 		$output .= 'Genre: '.get_queried_object()->name;
 	} else if(is_tax('mbt_series')) {
 		$output .= 'Series: '.get_queried_object()->name;
-	} else if(mbt_is_booktable_page()) {
-		$output .= 'Book Table';
 	}
 
 	return apply_filters('mbt_get_book_archive_title', $output);
