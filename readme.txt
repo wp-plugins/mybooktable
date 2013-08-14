@@ -3,7 +3,7 @@ Contributors: authormedia, zookatron
 Donate link: http://www.authormedia.com/mybooktable/
 Tags: books, bookstore, authors, ecommerce, amazon, affiliate, store, booktable, my, book, table
 Requires at least: 3.5.0
-Tested up to: 3.5.1
+Tested up to: 3.5.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -42,6 +42,16 @@ No! The whole idea behind MyBookTable is that Amazon (and others) do all the har
 No! This plugin would work great for anyone wanting to have an Amazon Affiliate Bookstore.
 
 == Changelog ==
+
+= 1.2.0 =
+* Added GoodReads Reviews and Buy Button
+* Added new Golden Buy Button style pack
+* Added Google Analytics Integration
+* Added new single book shortcode
+* Added new breadcrumbs system
+* Improved SEO: Added new semantic markup and OpenGraph tags
+* Added new drag & drop book sorting system
+* Fixed various bugs
 
 = 1.1.5 =
 * Added adjustable image sizes to Featured Book Widget

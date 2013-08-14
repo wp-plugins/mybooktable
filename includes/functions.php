@@ -29,6 +29,7 @@ function mbt_reset_settings() {
 		'enable_socialmedia_badges_book_excerpt' => true,
 		'enable_socialmedia_bar_single_book' => true,
 		'enable_seo' => true,
+		'enable_breadcrumbs' => true,
 		'series_in_excerpts' => false,
 		'posts_per_page' => false
 	);
@@ -86,8 +87,12 @@ function mbt_is_booktable_page() {
 }
 
 function mbt_get_booktable_url() {
-	$url = get_permalink(mbt_get_setting('booktable_page'));
-	if(empty($url)) { $url = get_post_type_archive_link('mbt_book'); }
+
+	if(mbt_get_setting('booktable_page') <= 0 or !get_page(mbt_get_setting('booktable_page'))) {
+		$url = get_post_type_archive_link('mbt_book');
+	} else {
+		$url = get_permalink(mbt_get_setting('booktable_page'));
+	}
 	return $url;
 }
 
@@ -102,27 +107,24 @@ function mbt_image_url($image) {
 	return apply_filters('mbt_image_url', empty($url) ? plugins_url('styles/Default/'.$image, dirname(__FILE__)) : $url);
 }
 
-function mbt_current_style_url($url) {
+function mbt_current_style_url($file) {
 	$style = mbt_get_setting('style_pack');
 	if(empty($style)) { $style = 'Default'; }
 
-	$url = mbt_style_url($url, $style);
-	if(empty($url)) { $url = mbt_style_url($url, 'Default'); }
+	$url = mbt_style_url($file, $style);
+	if(empty($url) and $style !== 'Default') { $url = mbt_style_url($file, 'Default'); }
 
 	return $url;
 }
 
-function mbt_style_url($url, $style) {
-	$folders = mbt_get_style_folders();
-
-	foreach($folders as $folder) {
+function mbt_style_url($file, $style) {
+	foreach(mbt_get_style_folders() as $folder) {
 		if(file_exists($folder['dir'].'/'.$style)) {
-			if(file_exists($folder['dir'].'/'.$style.'/'.$url)) {
-				return $folder['url'].'/'.$style.'/'.$url;
+			if(file_exists($folder['dir'].'/'.$style.'/'.$file)) {
+				return $folder['url'].'/'.$style.'/'.$file;
 			}
 		}
 	}
-
 	return '';
 }
 

@@ -22,8 +22,8 @@ function mbt_templates_init() {
 
 		//book archive hooks
 		add_action('mbt_book_archive_content', 'mbt_do_book_archive_content');
-		add_action('mbt_before_book_archive', 'mbt_do_before_book_archive', -100);
-		add_action('mbt_after_book_archive', 'mbt_do_after_book_archive', 100);
+		add_action('mbt_before_book_archive', 'mbt_do_before_book_archive', 0);
+		add_action('mbt_after_book_archive', 'mbt_do_after_book_archive', 20);
 		add_action('mbt_book_archive_header', 'mbt_do_book_archive_header');
 		add_action('mbt_book_archive_header_image', 'mbt_do_book_archive_header_image');
 		add_action('mbt_book_archive_header_title', 'mbt_do_book_archive_header_title');
@@ -34,8 +34,8 @@ function mbt_templates_init() {
 
 		//single book hooks
 		add_action('mbt_single_book_content', 'mbt_do_single_book_content');
-		add_action('mbt_before_single_book', 'mbt_do_before_single_book', -100);
-		add_action('mbt_after_single_book', 'mbt_do_after_single_book', 100);
+		add_action('mbt_before_single_book', 'mbt_do_before_single_book', 0);
+		add_action('mbt_after_single_book', 'mbt_do_after_single_book', 20);
 		add_action('mbt_single_book_images', 'mbt_do_single_book_images');
 		add_action('mbt_single_book_title', 'mbt_do_single_book_title');
 		add_action('mbt_single_book_price', 'mbt_do_single_book_price');
@@ -46,8 +46,8 @@ function mbt_templates_init() {
 		add_action('mbt_after_single_book', 'mbt_the_book_series_box');
 
 		//book excerpt hooks
-		add_action('mbt_before_book_excerpt', 'mbt_do_before_book_excerpt', -100);
-		add_action('mbt_after_book_excerpt', 'mbt_do_after_book_excerpt', 100);
+		add_action('mbt_before_book_excerpt', 'mbt_do_before_book_excerpt', 0);
+		add_action('mbt_after_book_excerpt', 'mbt_do_after_book_excerpt', 20);
 		add_action('mbt_book_excerpt_images', 'mbt_do_book_excerpt_images');
 		add_action('mbt_book_excerpt_title', 'mbt_do_book_excerpt_title');
 		add_action('mbt_book_excerpt_price', 'mbt_do_book_excerpt_price');
@@ -106,6 +106,8 @@ function mbt_pre_get_posts($query) {
 
 function mbt_enqueue_styles() {
 	wp_enqueue_style('mbt-style', apply_filters('mbt_css', plugins_url('css/frontend-style.css', dirname(__FILE__))));
+	$plugin_style_css = mbt_current_style_url('style.css');
+	if(!empty($plugin_style_css)) { wp_enqueue_style('mbt-plugin-style', $plugin_style_css); }
 }
 
 function mbt_get_template_folders() {
@@ -412,7 +414,7 @@ function mbt_get_book_image($post_id, $attrs = '') {
 	foreach($attrs as $attr => $value) {
 		$attributes[] = $attr.'="'.$value.'"';
 	}
-	return apply_filters('mbt_get_book_image', '<img src="'.$src.'" '.implode($attributes, ' ').'>');
+	return apply_filters('mbt_get_book_image', '<img itemprop="image" src="'.$src.'" '.implode($attributes, ' ').'>');
 }
 function mbt_the_book_image($attrs = '') {
 	global $post;
@@ -423,21 +425,25 @@ function mbt_the_book_image($attrs = '') {
 
 function mbt_get_book_price($post_id) {
 	$price = get_post_meta($post_id, 'mbt_price', true);
-	return apply_filters('mbt_get_book_price', preg_match("/^[0-9,.]+$/", $price) ? "$".number_format((double)$price, 2) : $price, $post_id);
+	if(preg_match("/^[0-9,.]+$/", $price)) { $price =  "$".number_format((double)$price, 2); }
+
+	$sale_price = get_post_meta($post_id, 'mbt_sale_price', true);
+	if(preg_match("/^[0-9,.]+$/", $sale_price)) { $sale_price =  "$".number_format((double)$sale_price, 2); }
+
+	$output = '';
+	if(!empty($sale_price) and !empty($price)) {
+		$output  = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price" class="price old-price">'.$price.'</span><link itemprop="availability" href="http://schema.org/Discontinued" /></span>';
+		$output .= '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price" class="price new-price">'.$sale_price.'</span><link itemprop="availability" href="http://schema.org/InStock" /></span>';
+	} else if(!empty($price)) {
+		$output  = '<span itemprop="offers" itemscope itemtype="http://schema.org/Offer"><span itemprop="price" class="price">'.$price.'</span><link itemprop="availability" href="http://schema.org/InStock" /></span>';
+	}
+
+	return apply_filters('mbt_get_book_price', $output, $post_id);
 }
 function mbt_the_book_price() {
 	global $post;
 	echo(mbt_get_book_price($post->ID));
 }
-
-function mbt_add_book_sale_price($price, $post_id) {
-	$sale_price = get_post_meta($post_id, 'mbt_sale_price', true);
-	if(!empty($sale_price)) {
-		$price = '<span class="normal-price">'.$price.'</span><span class="sale-price">'.(preg_match("/^[0-9,.]*$/", $sale_price) ? "$".number_format((double)$sale_price, 2) : $sale_price).'</span>';
-	}
-	return $price;
-}
-add_filter('mbt_get_book_price', 'mbt_add_book_sale_price', 20, 2);
 
 
 
@@ -547,7 +553,7 @@ function mbt_the_book_blurb($read_more = false) {
 
 function mbt_get_book_unique_id($post_id) {
 	$unique_id = get_post_meta($post_id, 'mbt_unique_id', true);
-	return empty($unique_id) ? "" : "<span class='meta-title'>ISBN:</span> ".$unique_id."<br>";
+	return empty($unique_id) ? '' : '<span class="meta-title">ISBN:</span> <span itemprop="isbn">'.$unique_id.'</span><br>';
 }
 function mbt_the_book_unique_id() {
 	global $post;
@@ -573,7 +579,7 @@ function mbt_get_book_series_list($post_id) {
 	$series = mbt_get_book_series($post_id);
 
 	while(!empty($series) and !is_wp_error($series)) {
-		$output = '<a href="'.esc_url(get_term_link($series, 'mbt_series')).'">'.$series->name.'</a>'.(empty($output) ? '' : ', '.$output);
+		$output = '<a itemprop="keywords" href="'.esc_url(get_term_link($series, 'mbt_series')).'">'.$series->name.'</a>'.(empty($output) ? '' : ', '.$output);
 		$series = get_term_by('id', $series->parent, 'mbt_series');
 	}
 
@@ -585,13 +591,13 @@ function mbt_get_book_series_list($post_id) {
 
 	return apply_filters('mbt_get_book_series_list', $output);
 }
-function mbt_get_the_term_list($post_id, $tax, $name, $name_plural) {
+function mbt_get_the_term_list($post_id, $tax, $name, $name_plural, $type) {
 	$terms = get_the_terms($post_id, $tax);
 	if(is_wp_error($terms) or empty($terms)){ return ''; }
 
 	foreach($terms as $term) {
 		$link = get_term_link($term, $tax);
-		$term_links[] = '<a href="'.esc_url($link).'">'.$term->name.'</a>';
+		$term_links[] = '<a itemprop="'.$type.'" href="'.esc_url($link).'">'.$term->name.'</a>';
 	}
 
 	return '<span class="meta-title">'.(count($terms) > 1 ? $name_plural : $name).':</span> '.join(', ', $term_links).'<br>';
@@ -608,7 +614,7 @@ function mbt_the_book_authors_list() {
 	echo(mbt_get_book_authors_list($post->ID));
 }
 function mbt_get_book_genres_list($post_id) {
-	return apply_filters('mbt_get_book_genres_list', mbt_get_the_term_list($post_id, 'mbt_genre', 'Genre', 'Genres', 'tag'));
+	return apply_filters('mbt_get_book_genres_list', mbt_get_the_term_list($post_id, 'mbt_genre', 'Genre', 'Genres', 'genre'));
 }
 function mbt_the_book_genres_list() {
 	global $post;

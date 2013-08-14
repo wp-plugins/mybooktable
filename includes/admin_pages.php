@@ -25,7 +25,7 @@ function mbt_enqueue_admin_js() {
 	wp_enqueue_style('jquery-ui', plugins_url('css/jquery-ui.css', dirname(__FILE__)));
 	wp_enqueue_script("mbt-media-upload", plugins_url('js/media-upload.js', dirname(__FILE__)));
 	wp_enqueue_script("mbt-settings-page", plugins_url('js/settings-page.js', dirname(__FILE__)));
-	wp_enqueue_media();
+	if(function_exists('wp_enqueue_media')) { wp_enqueue_media(); }
 }
 
 function mbt_add_admin_pages() {
@@ -56,16 +56,17 @@ function mbt_save_settings_page() {
 		}
 
 		mbt_update_setting('booktable_page', $_REQUEST['mbt_booktable_page']);
-		mbt_update_setting('compatibility_mode', isset($_REQUEST['mbt_compatibility_mode'])?true:false);
+		mbt_update_setting('compatibility_mode', isset($_REQUEST['mbt_compatibility_mode']));
 		mbt_update_setting('style_pack', $_REQUEST['mbt_style_pack']);
 		mbt_update_setting('image_size', $_REQUEST['mbt_image_size']);
 
-		mbt_update_setting('enable_socialmedia_badges_single_book', isset($_REQUEST['mbt_enable_socialmedia_badges_single_book'])?true:false);
-		mbt_update_setting('enable_socialmedia_badges_book_excerpt', isset($_REQUEST['mbt_enable_socialmedia_badges_book_excerpt'])?true:false);
-		mbt_update_setting('enable_socialmedia_bar_single_book', isset($_REQUEST['mbt_enable_socialmedia_bar_single_book'])?true:false);
+		mbt_update_setting('enable_socialmedia_badges_single_book', isset($_REQUEST['mbt_enable_socialmedia_badges_single_book']));
+		mbt_update_setting('enable_socialmedia_badges_book_excerpt', isset($_REQUEST['mbt_enable_socialmedia_badges_book_excerpt']));
+		mbt_update_setting('enable_socialmedia_bar_single_book', isset($_REQUEST['mbt_enable_socialmedia_bar_single_book']));
 
-		mbt_update_setting('enable_seo', isset($_REQUEST['mbt_enable_seo'])?true:false);
-		mbt_update_setting('series_in_excerpts', isset($_REQUEST['mbt_series_in_excerpts'])?true:false);
+		mbt_update_setting('enable_seo', isset($_REQUEST['mbt_enable_seo']));
+		mbt_update_setting('enable_breadcrumbs', isset($_REQUEST['mbt_enable_breadcrumbs']));
+		mbt_update_setting('series_in_excerpts', isset($_REQUEST['mbt_series_in_excerpts']));
 		mbt_update_setting('posts_per_page', $_REQUEST['mbt_posts_per_page']);
 
 		$settings_updated = true;
@@ -233,6 +234,13 @@ function mbt_render_settings_page() {
 								<td>
 									<input type="checkbox" name="mbt_enable_seo" id="mbt_enable_seo" <?php echo(mbt_get_setting('enable_seo') ? ' checked="checked"' : ''); ?> >
 									<p class="description">Check to enable MyBookTable's built-in SEO features.</p>
+								</td>
+							</tr>
+							<tr valign="top">
+								<th scope="row"><label for="mbt_enable_seo">Enable Breadcrumbs</label></th>
+								<td>
+									<input type="checkbox" name="mbt_enable_breadcrumbs" id="mbt_enable_breadcrumbs" <?php echo(mbt_get_setting('enable_breadcrumbs') ? ' checked="checked"' : ''); ?> >
+									<p class="description">Check to enable MyBookTable's built-in breadcrumbs.</p>
 								</td>
 							</tr>
 						</tbody>
@@ -464,7 +472,7 @@ function mbt_render_founders_page() {
 			<li><a href="http://wadewebster.com">Wade Webster</a></li>
 			<li><a href="http://gloriaclover.com">Gloria Clover</a>, author of <a href="http://www.amazon.com/Children-King-Book-Two-ebook/dp/B008W1AUUO/ref=sr_1_1?ie=UTF8&amp;qid=1366664833&amp;sr=8-1&amp;keywords=The+Fire+Starter%2C+Clover">The Fire Starter</a></li>
 			<li><a href="http://www.lisabergren.com">Lisa Bergren</a>, author of <a href="http://www.amazon.com/Glamorous-Illusions-Novel-Grand-Series/dp/1434764303/ref=tmm_pap_title_0">Glamorous Illusions</a></li>
-			<li><a href="http://techguyjay.com/books" target="_blank">Josh Goldsmith</a></li>
+			<li><a href="http://techguyjay.com/books" target="_blank">Jay Donovan</a></li>
 			<li><a href="http://www.DebiJHolliday.com" target="_blank">Debi J. Holliday</a></li>
 			<li><a href="http://www.nickbuchan.com" target="_blank">Nick and Lu</a></li>
 			<li><a href="http://www.sbbflonghorns.com" target="_blank">Chrisann Merriman</a></li>
