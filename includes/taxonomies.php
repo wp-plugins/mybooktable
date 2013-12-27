@@ -20,7 +20,7 @@ function mbt_register_taxonomies()
 			'singular_name' => __('Author', 'mybooktable'),
 			'all_items' => __('All Authors', 'mybooktable'),
 			'add_new' => __('Add New', 'mybooktable'),
-			'add_new_item' => __('Add New Autohr', 'mybooktable'),
+			'add_new_item' => __('Add New Author', 'mybooktable'),
 			'new_item_name' => __('New Author', 'mybooktable'),
 			'edit_item' => __('Edit Author', 'mybooktable'),
 			'view_item' => __('View Authors', 'mybooktable'),
@@ -30,7 +30,7 @@ function mbt_register_taxonomies()
 			'parent_item_colon' => __('Parent Authors:', 'mybooktable'),
 		),
 		'show_ui' => true,
-		'rewrite' => array('slug' => apply_filters('mbt_author_rewrite_name', 'authors'))
+		'rewrite' => array('slug' => apply_filters('mbt_author_rewrite_name', _x('authors', 'URL slug', 'mybooktable') ))
 	));
 
 	register_taxonomy('mbt_genre', 'mbt_book', array(
@@ -40,37 +40,37 @@ function mbt_register_taxonomies()
 			'singular_name' => __('Genre', 'mybooktable'),
 			'all_items' => __('All Genres', 'mybooktable'),
 			'add_new' => __('Add New', 'mybooktable'),
-			'add_new_item' => __('Add New Genres', 'mybooktable'),
+			'add_new_item' => __('Add New Genre', 'mybooktable'),
 			'new_item_name' => __('New Genre', 'mybooktable'),
 			'edit_item' => __('Edit Genre', 'mybooktable'),
 			'view_item' => __('View Genres', 'mybooktable'),
 			'update_item' => __('Update Genre', 'mybooktable'),
-			'search_items' => __('Search Genre', 'mybooktable'),
+			'search_items' => __('Search Genres', 'mybooktable'),
 			'parent_item' => __('Parent Genre', 'mybooktable'),
 			'parent_item_colon' => __('Parent Genres:', 'mybooktable'),
 		),
 		'show_ui' => true,
-		'rewrite' => array('slug' => apply_filters('mbt_genre_rewrite_name', 'genre'))
+		'rewrite' => array('slug' => apply_filters('mbt_genre_rewrite_name', _x('genre', 'URL slug', 'mybooktable') ))
 	));
 
 	register_taxonomy('mbt_series', 'mbt_book', array(
 		'hierarchical' => true,
 		'labels' => array(
 			'name' => __('Series', 'mybooktable'),
-			'singular_name' => __('Serie', 'mybooktable'),
+			'singular_name' => __('Series', 'mybooktable'),
 			'all_items' => __('All Series', 'mybooktable'),
 			'add_new' => __('Add New', 'mybooktable'),
-			'add_new_item' => __('All Authors', 'mybooktable'),
+			'add_new_item' => __('All Series', 'mybooktable'),
 			'new_item_name' => __('New Series', 'mybooktable'),
 			'edit_item' => __('Edit Series', 'mybooktable'),
 			'view_item' => __('View Series', 'mybooktable'),
-			'update_item' => __('Update Serie', 'mybooktable'),
-			'search_items' => __('Search Serie', 'mybooktable'),
+			'update_item' => __('Update Series', 'mybooktable'),
+			'search_items' => __('Search Series', 'mybooktable'),
 			'parent_item' => __('Parent Series', 'mybooktable'),
 			'parent_item_colon' => __('Parent Series:', 'mybooktable'),
 		),
 		'show_ui' => true,
-		'rewrite' => array('slug' => apply_filters('mbt_series_rewrite_name', 'series'))
+		'rewrite' => array('slug' => apply_filters('mbt_series_rewrite_name', _x('series', 'URL slug', 'mybooktable') ))
 	));
 }
 
