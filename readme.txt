@@ -152,17 +152,26 @@ No! This plugin would work great for anyone wanting to have an Amazon Affiliate 
 
 == Upgrade Notice ==
 
-= 1.2.3 =
-This version adds **many** new buy button options including Apple iBooks & Sony Reader.
+= 1.2.5 =
+This version adds several cool new features including "Publisher" and "Publication Year" fields
 
 == Changelog ==
+
+= 1.2.6 =
+* Added new Taxonomy Widget for displaying a list of Authors, Genres, or Series
+* Added the ability to select multiple featured books and choose to turn off the book blurbs on the Featured Book Widget
+* Fixed Barnes & Noble Linkshare Integration
+* Updated built-in CSS styling to be more flexible and responsive to theme styles
+* Other bug fixes and typo corrections
 
 = 1.2.5 =
 * Added Publisher and Publication Year Fields
 * Added the ability to remove legal disclosures
 * Added the ability to disable affiliate system to the Professional & Developer Add-ons
 * Added "nofollow" tags to the Buy Buttons to improve SEO
+* Fixed the GoodReads Reviews to be Better Looking and Mobile Responsive
 * Added "Home" to the breadcrumb trail
+* Added the Ability to Remove Affiliate Ainks Completly (Pro & Dev only)
 * Other bug fixes and typo corrections
 
 = 1.2.4 =
