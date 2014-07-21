@@ -18,7 +18,7 @@ class MBT_Featured_Book extends WP_Widget {
 		$this->defaultargs = array('title' => __('Featured Books', 'mybooktable'), 'selectmode' => 'by_date', 'featured_books' => array(), 'image_size' => 'medium', 'num_books' => 1, 'show_blurb' => true);
 	}
 
-	function enqueue_widget_js() {
+	public static function enqueue_widget_js() {
 		global $pagenow;
 		if($pagenow == 'widgets.php') {
 			wp_enqueue_script("mbt-widgets", plugins_url('js/widgets.js', dirname(dirname(__FILE__))), 'jquery', '', true);
@@ -151,7 +151,7 @@ class MBT_Featured_Book extends WP_Widget {
 			<div class="mbt-featured-book-options" <?php echo($selectmode !== 'manual_select' ? '' : 'style="display:none"'); ?>>
 				<p>
 					<label><?php _e('Number of Books:', 'mybooktable'); ?>
-						<input type="number" name="<?php echo($this->get_field_name('num_books')); ?>" value="<?php echo(intval($num_books ? $num_books : 1)); ?>"  min="1" max="10" <?php echo($image_size == $size ? ' checked' : ''); ?> >
+						<input type="number" name="<?php echo($this->get_field_name('num_books')); ?>" value="<?php echo(intval($num_books ? $num_books : 1)); ?>"  min="1" max="10">
 					</label>
 				</p>
 			</div>
@@ -217,7 +217,7 @@ class MBT_Taxonomies extends WP_Widget {
 		?>
 			<label><?php _e('Title', 'mybooktable'); ?>: <input type="text" name="<?php echo($this->get_field_name('title')); ?>" value="<?php echo($instance['title']); ?>"></label>
 			<br /><br />
-			<label for="<?php echo $this->get_field_id('tax'); ?>">Displayed taxonomy', 'mybooktable'); ?>:</label>
+			<label for="<?php echo $this->get_field_id('tax'); ?>"><?php _e('Displayed taxonomy', 'mybooktable'); ?>:</label>
 			<select name="<?php echo $this->get_field_name('tax'); ?>" id="<?php echo $this->get_field_id('tax'); ?>" class="widefat">
 				<option value=""><?php _e('-- Choose One --', 'mybooktable'); ?></option>
 				<option value="mbt_author"<?php selected($tax, 'mbt_author'); ?>><?php _e('Authors', 'mybooktable'); ?></option>
