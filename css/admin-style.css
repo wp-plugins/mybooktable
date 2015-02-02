@@ -108,62 +108,8 @@
 }
 
 /*---------------------------------------------------------*/
-/* Shortcode Inserter                                      */
-/*---------------------------------------------------------*/
-
-.authormedia-shortcode-section-nav {
-	position:absolute;
-	top:0px;
-	left:0px;
-	right:0px;
-	height:50px;
-	z-index:150;
-	background:white;
-}
-
-.authormedia-shortcode-section-nav .nav-tab-active,
-.authormedia-shortcode-section-nav  .nav-tab-active:hover {
-	border-bottom: 1px solid #ccc;
-}
-
-.authormedia-shortcode-section {
-	top: 50px;
-	display: none;
-}
-
-.authormedia_shortcode_icon {
-	background:url('../images/am-logo.png') no-repeat top left;
-	display: inline-block;
-	height: 16px;
-	margin: 0 2px 0 0;
-	vertical-align: text-top;
-	width: 17px;
-}
-
-.authormedia-shortcode-section .media-frame-title {
-	padding-top: 15px;
-}
-
-#authormedia_shortcode_form_intro {
-	color: #aaa;
-	font-size: 3em;
-	line-height: 1.2em;
-	padding: 1em;
-}
-
-.authormedia_shortcode_description {
-	border-bottom: 1px solid #dfdfdf;
-	padding-bottom: 1em;
-	margin: 1em;
-}
-
-/*---------------------------------------------------------*/
 /* Dashboard Page                                          */
 /*---------------------------------------------------------*/
-
-#icon-mbt_dashboard {
-	background-image: url('../images/edit.png');
-}
 
 .mbt-dashboard .welcome-video-container {
 	text-align: center;
@@ -230,6 +176,39 @@
 	-webkit-transition-duration: .3s;
 }
 
+.mbt-dashboard .welcome-panel-promotions h3 {
+	margin-bottom: 10px;
+}
+
+.mbt-dashboard .dashboard-contents-left {
+	padding-right: 20px;
+}
+
+.mbt-dashboard .welcome-panel-promotions-right h3 {
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.mbt-dashboard .welcome-panel-promotions-right {
+	vertical-align: top;
+	width: 200px;
+	padding: 23px 20px;
+}
+
+.mbt-dashboard .welcome-panel-promotions-right img {
+	width: 200px;
+	height: 200px;
+}
+
+.mbt-dashboard .welcome-panel-promotions-right .welcome-panel-content {
+	margin-left: 0px;
+}
+
+.mbt-dashboard .welcome-panel-promotions-right .welcome-panel-column {
+	width: auto;
+	display: inline-block;
+}
+
 .mbt-dashboard .metabox-holder .postbox {
 	width: 40%;
 	float: left;
@@ -247,8 +226,9 @@
 	font-weight: bold;
 }
 
-.mbt-dashboard .metabox-holder #mbt_dashboard_upsell .inside .currently-using {
+.mbt-dashboard .metabox-holder #mbt_dashboard_upsell .inside h1 {
 	line-height: 1.2;
+	margin: 0px;
 }
 
 .mbt-dashboard .metabox-holder #mbt_dashboard_upsell .inside .current-version {
@@ -263,36 +243,409 @@
 /* Settings Pages                                          */
 /*---------------------------------------------------------*/
 
+.mbt_settings .ui-tabs-nav li a {
+	box-shadow: none;
+}
+
 .mbt_settings th {
 	width:18%;
 	font-weight: bold;
 }
 
+.mbt_settings .mbt-section {
+	border: 1px solid #aaaaaa;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	box-shadow: 0 1px 1px rgba(0,0,0,.2);
+	background: #fff;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.mbt_settings .mbt-section-header {
+	padding: 8px 14px;
+	border-bottom: 1px solid #aaaaaa;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.mbt_settings .mbt-section-content {
+	padding: 10px 15px;
+}
+
+/* feedback boxes */
+
 .mbt_settings .mbt_api_key_feedback {
 	padding-bottom: 8px;
 }
 
-.mbt_settings .mbt_api_key_feedback .key_valid {
+.mbt_settings .mbt_feedback .mbt_feedback_loading {
+	position: relative;
+	vertical-align: top;
 	display: inline-block;
-	background: url('../images/tick.png') 0px 2px no-repeat;
-	padding-left: 20px;
-	color: #5FA556;
 }
 
-.mbt_settings .mbt_api_key_feedback .key_invalid {
+.mbt_settings .mbt_feedback .mbt_feedback_spinner {
+	vertical-align: top;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -9px 0 0 -9px;
 	display: inline-block;
-	background: url('../images/exclamation.png') 0px 2px no-repeat;
-	padding-left: 20px;
-	color: #E66455;
+	width: 18px;
+	height: 18px;
+
+	background: url('../images/spinner.png') 0px 0px no-repeat;
+	background-size: 100% 100%;
+
+	-webkit-animation-name: spinnerRotate;
+	-webkit-animation-duration: 2s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
 }
 
-.mbt_settings #mbt_api_key_refresh {
+@-webkit-keyframes spinnerRotate {
+	from {
+		-webkit-transform:rotate(0deg);
+	}
+	to {
+		-webkit-transform:rotate(360deg);
+	}
+}
+
+.mbt_settings div.mbt_feedback_refresh {
 	display: inline-block;
 	vertical-align: bottom;
 	background: url('../images/refresh.png') 0px 0px no-repeat;
 	width: 24px;
 	height: 24px;
 	cursor: pointer;
+}
+
+.mbt_admin_message_success {
+	display: inline-block;
+	background: url('../images/tick.png') 0px 2px no-repeat;
+	padding-left: 20px;
+	color: #5FA556;
+}
+
+.mbt_admin_message_failure {
+	display: inline-block;
+	background: url('../images/exclamation.png') 0px 2px no-repeat;
+	padding-left: 20px;
+	color: #E66455;
+}
+
+/* affiliate settings */
+
+.mbt_settings .mbt-affiliate-usedby {
+	padding: 6px;
+
+	font-weight: normal;
+	font-size: 12px;
+}
+
+.mbt_settings .mbt-affiliate-usedby ul {
+	padding: 0;
+	margin: 0;
+}
+
+.mbt_settings .mbt-affiliate-usedby ul li {
+	list-style-type: disc;
+	list-style-position: inside;
+
+	padding: 0;
+	margin: 6px 0 0 0;
+}
+
+.mbt_settings .mbt-default-affiliates {
+	border-top: 1px solid #ddd;
+	padding: 4px 0 15px 0;
+}
+
+.mbt_settings .mbt-default-affiliates .mbt-default-affiliates-small {
+	padding-left: 5px;
+	font-size: 10px;
+}
+
+.mbt_settings .mbt-integrate-label {
+	width: 120px;
+	display: inline-block;
+}
+
+/* display settings */
+
+.mbt_settings #mbt_style_pack {
+	width: 200px;
+	vertical-align: top;
+}
+
+.mbt_settings #mbt_style_pack_preview {
+	display: inline-block;
+}
+
+.mbt_settings #mbt_style_pack_preview img {
+	width: 172px;
+	height: 30px;
+	vertical-align: top;
+}
+
+.mbt_settings .mbt_reviews_box_disabled,
+.mbt_settings .mbt_reviews_box_disabled a {
+	color: #888;
+}
+
+/*---------------------------------------------------------*/
+/* Help Page                                               */
+/*---------------------------------------------------------*/
+
+.mbt_help .mbt_help_title {
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.mbt_help .mbt_help_box {
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	background: #fff;
+	border-radius: 5px;
+	margin-bottom: 20px;
+}
+
+.mbt_help .mbt_help_box_title {
+	padding: 8px 14px;
+	border-bottom: 1px solid #eee;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.mbt_help .mbt_help_box_content {
+	padding: 10px 15px;
+}
+
+.mbt_help .mbt_help_box_content h3 {
+	margin: 0.5em 0 1em;
+}
+
+/* top help links */
+
+.mbt_help .mbt_help_top_links {
+	padding: 10px 0px 20px 0px;
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link {
+	text-decoration: none;
+	font-size: 18px;
+	line-height: 1.3em;
+	text-align: center;
+	color: #0074a2;
+	position: relative;
+
+	display: block;
+	width: 360px;
+	height: 50px;
+	float: left;
+
+	border: 1px solid #D1E4FF;
+	background: #EAF3FF;
+	padding: 20px 0 20px 65px;
+	margin: 0 5px 5px 0;
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link:hover {
+	color: #0074a2;
+	border: 1px solid #AECEF9;
+	background: #C9DEFC;
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link .mbt_icon {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	top: 5px;
+	left: 5px;
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link.mbt_apikey .mbt_icon {
+	background: url('../images/help/key.png');
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link.mbt_forum {
+	padding-left: 80px;
+	width: 345px;
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link.mbt_forum .mbt_icon {
+	left: 10px;
+	background: url('../images/help/forum.png');
+}
+
+.mbt_help .mbt_help_top_links .mbt_help_link.mbt_develop .mbt_icon {
+	background: url('../images/help/develop.png');
+}
+
+/* premium support */
+
+.mbt_help .mbt_get_premium_support {
+	padding-bottom: 20px;
+}
+
+.mbt_help .mbt_get_premium_support a {
+	font-size: 18px;
+	font-weight: bold;
+	padding: 5px 14px;
+	height: auto;
+}
+
+.mbt_help .mbt_premium_support {
+	padding: 0;
+	margin: 0;
+}
+
+.mbt_help .mbt_premium_support li {
+	padding: 20px 30px 20px 70px;
+	margin: 0 5px 5px 0;
+	height: 20px;
+	display: block;
+	position: relative;
+}
+
+@media screen and (min-width: 800px) {
+	.mbt_help .mbt_premium_support li {
+		display: inline-block;
+		float: left;
+	}
+}
+
+.mbt_help .mbt_premium_support li .mbt_icon {
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	top: 0px;
+	left: 0px;
+}
+
+.mbt_help .mbt_premium_support li .mbt_icon.mbt_ticket {
+	background: url('../images/help/ticket.png');
+}
+
+.mbt_help .mbt_premium_support li .mbt_icon.mbt_support {
+	background: url('../images/help/support.png');
+}
+
+.mbt_help .mbt_premium_support li .mbt_icon.mbt_feature {
+	background: url('../images/help/feature.png');
+}
+
+.mbt_help .mbt_premium_support li .mbt_icon.mbt_bug {
+	background: url('../images/help/bug.png');
+}
+
+.mbt_help .mbt_premium_support li a {
+	text-decoration: none;
+	font-size: 18px;
+}
+
+/* articles */
+
+.mbt_help .mbt_articles {
+	padding: 0;
+	margin: 0;
+}
+
+.mbt_help .mbt_articles li {
+	list-style-type: none;
+	display: block;
+	width: 180px;
+	height: 180px;
+	float: left;
+	position: relative;
+
+	border: 1px solid #A8CBFD;
+	margin: 0 5px 5px 0;
+}
+
+.mbt_help .mbt_articles li img {
+	width: 100%;
+	height: 100%;
+}
+
+.mbt_help .mbt_articles li a {
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 14px;
+
+	display: block;
+	width: 180px;
+	height: 180px;
+}
+
+.mbt_help .mbt_articles li a span {
+	background: url('../images/help/bg.png');
+	border-top: 1px solid #A8CBFD;
+
+	width: 180px;
+	height: 65px;
+	display: block;
+	box-sizing: border-box;
+	padding: 4px 7px;
+	position: absolute;
+	bottom: 0;
+}
+
+/* video tutorials */
+
+.mbt_help .mbt_video_selector {
+	box-sizing: border-box;
+}
+
+.mbt_help .mbt_video_selector a {
+	display: block;
+	padding: 8px 14px 8px 10px;
+	border-bottom: 1px solid #eee;
+	font-size: 14px;
+	box-shadow: none;
+	color: #0074a2;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.mbt_help .mbt_video_selector a:hover {
+	color: #2ea2cc;
+}
+
+.mbt_help .mbt_video_selector a:nth-child(2n+1) {
+	background-color: #f9f9f9;
+}
+
+.mbt_help .mbt_video_display {
+	box-sizing: border-box;
+	padding: 10px 15px;
+}
+
+.mbt_help .mbt_video_display .mbt_video {
+	display: none;
+}
+
+.mbt_help .mbt_video_display .mbt_video iframe {
+	width: 640px;
+	height: 360px;
+}
+
+@media screen and (min-width: 1100px) {
+	.mbt_help .mbt_video_selector {
+		float: left;
+		clear: none;
+		width: 25%;
+	}
+
+	.mbt_help .mbt_video_display {
+		float: right;
+		clear: none;
+		width: 75%;
+
+		border-left: 1px solid #eee;
+	}
 }
 
 /*---------------------------------------------------------*/
@@ -315,6 +668,43 @@
 }
 
 /*---------------------------------------------------------*/
+/* Import Page                                             */
+/*---------------------------------------------------------*/
+
+.mbt_import_page .importers .import-system.disabled {
+	color: #666
+}
+
+#mbt-book-import-progress-bar {
+	width: 200px;
+	height: 30px;
+
+	border: 1px solid #e5e5e5;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	background: #fff;
+	border-radius: 15px;
+}
+
+#mbt-book-import-progress-bar-inner {
+	width: 30px;
+	height: 30px;
+	transition: width 0.5s;
+
+	background: url('../images/progress-bar.png');
+	border-radius: 15px;
+}
+
+.mbt_book_importer .mbt_imported_books {
+	list-style: disc inside none;
+}
+
+.mbt_book_importer .mbt_imported_books a:after {
+    content: url('../images/new-window.png');
+    margin-left: 5px;
+}
+
+/*---------------------------------------------------------*/
 /* Taxonomy Pages                                          */
 /*---------------------------------------------------------*/
 
@@ -326,6 +716,24 @@
 	width: 80px;
 }
 
+#mbt_author_priority_display {
+	font-weight: bold;
+	font-size: 20px;
+	float: left;
+	width: 100px;
+	margin: 5px 10px;
+}
+
+#mbt_author_priority {
+	display:none;
+}
+
+#mbt_author_priority_slider {
+	width: 200px;
+	float: left;
+	margin: 8px 5px 5px;
+}
+
 /*---------------------------------------------------------*/
 /* Install Messages                                        */
 /*---------------------------------------------------------*/
@@ -334,11 +742,7 @@
 	position: relative;
 	z-index: 100;
 	border: 1px solid #21759b;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	-webkit-box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
-	-moz-box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
+	border-radius: 8px;
 	box-shadow: inset 0 0 15px rgba(0,0,0,0.04);
 	background: #2a95c5;
 	display: inline-block;
@@ -362,8 +766,6 @@
 	margin: 6px 5px 6px 10px;
 	float: left;
 
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
 	border-radius: 5px;
 }
 
@@ -388,7 +790,7 @@
 	background-image: -ms-linear-gradient(top,#2a95c5,#21759b);
 	background-image: -o-linear-gradient(top,#2a95c5,#21759b);
 	background-image: linear-gradient(to bottom,#2a95c5,#21759b);
-	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
+
 	box-shadow: inset 0 1px 0 rgba(120,200,230,0.5);
 
 	display: inline-block;
@@ -413,7 +815,6 @@
 	background-image: -o-linear-gradient(top,#2e9fd2,#21759b);
 	background-image: linear-gradient(to bottom,#2e9fd2,#21759b);
 	border-color: #1B607F;
-	-webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
 	box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
 
@@ -421,16 +822,15 @@
 	-webkit-transition-duration: .3s;
 }
 
-.mbt-email-subscribe-message h4 {
-	padding-right: 20px;
+.mbt-email-pointer .wp-pointer-content h3:before {
+	top: 18px;
+	content: '\f331';
 }
 
-.mbt-email-subscribe-message form {
-	float: right;
-}
-
-.mbt-email-subscribe-message form input {
-	vertical-align: middle;
+.mbt-email-pointer #mbt-pointer-email.error {
+	border: 1px solid #FFB8B5;
+	background: #FFDAD8;
+	box-shadow: 0px 0px 6px #FFB8B5;
 }
 
 /*---------------------------------------------------------*/
@@ -476,4 +876,66 @@
 	text-align: center;
 	width: 20px;
 	-webkit-font-smoothing: antialiased!important;
+}
+
+/*---------------------------------------------------------*/
+/* Shortcode Inserter                                      */
+/*---------------------------------------------------------*/
+
+.authormedia-shortcode-section-nav {
+	position:absolute;
+	top:0px;
+	left:0px;
+	right:0px;
+	height:50px;
+	z-index:150;
+	background:white;
+}
+
+.authormedia-shortcode-section-nav .nav-tab-active,
+.authormedia-shortcode-section-nav  .nav-tab-active:hover {
+	border-bottom: 1px solid #ccc;
+}
+
+.authormedia-shortcode-section {
+	top: 50px;
+	display: none;
+}
+
+.authormedia_shortcode_icon {
+	background:url('../images/am-logo.png') no-repeat top left;
+	display: inline-block;
+	height: 16px;
+	margin: 0 2px 0 0;
+	vertical-align: text-top;
+	width: 17px;
+}
+
+.authormedia-shortcode-section .media-frame-title {
+	padding-top: 15px;
+}
+
+#authormedia_shortcode_form_intro {
+	color: #aaa;
+	font-size: 3em;
+	line-height: 1.2em;
+	padding: 1em;
+}
+
+.authormedia_shortcode_description {
+	border-bottom: 1px solid #dfdfdf;
+	padding-bottom: 1em;
+	margin: 1em;
+}
+
+/*---------------------------------------------------------*/
+/* Wordpress Sidebar                                       */
+/*---------------------------------------------------------*/
+
+a[href="admin.php?page=mbt_upgrade_link"] {
+	color: #6bbc5b !important;
+	white-space: nowrap;
+}
+a[href="admin.php?page=mbt_upgrade_link"]:hover {
+	color: #7ad368 !important;
 }

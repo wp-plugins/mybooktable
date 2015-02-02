@@ -1,15 +1,15 @@
 <?php
 /*
-Plugin Name: MyBookTable - WordPress Affiliate Bookstore
+Plugin Name: MyBookTable - WordPress Bookstore
 Plugin URI: http://www.authormedia.com/mybooktable/
 Description: A WordPress Bookstore Plugin to help authors sell more books.
 Author: Author Media
 Author URI: http://www.authormedia.com
 Text Domain: mybooktable
-Version: 1.3.8
+Version: 2.0.0
 */
 
-define("MBT_VERSION", "1.3.8");
+define("MBT_VERSION", "2.0.0");
 
 require_once("includes/functions.php");
 require_once("includes/setup.php");
@@ -28,6 +28,7 @@ require_once("includes/extras/breadcrumbs.php");
 require_once("includes/extras/goodreads.php");
 require_once("includes/extras/booksorting.php");
 require_once("includes/extras/getnoticed.php");
+require_once("includes/extras/totallybooked.php");
 
 
 
@@ -54,10 +55,8 @@ register_deactivation_hook(__FILE__, 'mbt_deactivate');
 /*---------------------------------------------------------*/
 
 function mbt_init() {
-	if($GLOBALS['pagenow'] == "plugins.php" and current_user_can('install_plugins') and isset($_GET['action']) and $_GET['action'] == 'deactivate' and isset($_GET['plugin']) and $_GET['plugin'] == plugin_basename(dirname(__FILE__)).'/mybooktable.php') { return; }
-	if($GLOBALS['pagenow'] == "plugins.php" and current_user_can('install_plugins') and isset($_GET['mbt_uninstall'])) { return mbt_uninstall(); }
-
-	if(function_exists('mbtdev_init') and (!defined('MBTPRO_VERSION') or (defined('MBTPRO_VERSION') and version_compare(MBTDEV_VERSION, MBTPRO_VERSION) >= 0))) { add_action('mbt_init', 'mbtdev_init'); } else if(function_exists('mbtpro_init')) { add_action('mbt_init', 'mbtpro_init'); }
+	//deprecated legacy functionality
+	if(function_exists('mbtdev_init') and mbt_get_setting('dev_active')) { add_action('mbt_init', 'mbtdev_init'); } else if(function_exists('mbtpro_init') and mbt_get_setting('pro_active')) { add_action('mbt_init', 'mbtpro_init'); }
 
 	do_action('mbt_before_init');
 
@@ -65,17 +64,23 @@ function mbt_init() {
 	mbt_load_settings();
 	mbt_upgrade_check();
 	mbt_customize_plugins_page();
-	add_filter('pre_set_site_transient_update_plugins', 'mbt_update_check');
-	add_action('init', 'mbt_rewrites_check', 999);
+	if(mbt_detect_deactivation()) { return; }
 
 	do_action('mbt_init');
 }
 add_action('plugins_loaded', 'mbt_init');
 
-function mbt_rewrites_check() {
-	global $wp_rewrite;
-	$rules = $wp_rewrite->wp_rewrite_rules();
-	if(!isset($rules[mbt_get_product_slug()."/?$"]) or $rules[mbt_get_product_slug()."/?$"] !== "index.php?post_type=mbt_book") { flush_rewrite_rules(); }
+function mbt_detect_deactivation() {
+	if($GLOBALS['pagenow'] == "plugins.php" and current_user_can('install_plugins') and isset($_GET['action']) and $_GET['action'] == 'deactivate' and isset($_GET['plugin']) and $_GET['plugin'] == plugin_basename(dirname(__FILE__)).'/mybooktable.php') {
+		mbt_update_setting('detect_deactivated', 'detected');
+		mbt_track_event('plugin_deactivated', true);
+		mbt_send_tracking_data();
+		return true;
+	} else if(mbt_get_setting('detect_deactivated') === 'detected') {
+		mbt_update_setting('detect_deactivated', false);
+		mbt_track_event('plugin_activated', true);
+	}
+	return false;
 }
 
 function mbt_customize_plugins_page() {
@@ -84,7 +89,10 @@ function mbt_customize_plugins_page() {
 }
 
 function mbt_plugin_action_links($actions) {
+	unset($actions['edit']);
 	$actions['settings'] = '<a href="'.admin_url('admin.php?page=mbt_settings').'">'.__('Settings', 'mybooktable').'</a>';
+	$actions['help'] = '<a href="'.admin_url('admin.php?page=mbt_help').'">'.__('Help', 'mybooktable').'</a>';
+	$actions['upgrade'] = '<a href="http://www.authormedia.com/mybooktable/upgrades" target="_blank">'.__('Purchase Upgrade', 'mybooktable').'</a>';
 	return $actions;
 }
 

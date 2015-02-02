@@ -7,9 +7,15 @@
 function mbt_taxonomies_init() {
 	add_action('init', 'mbt_register_taxonomies');
 	add_filter('parent_file', 'mbt_override_taxonomy_parent_files');
-	add_action('admin_init', 'mbt_taxonomy_editors_init');
+	add_action('admin_init', 'mbt_taxonomy_images_init');
+	add_action('admin_init', 'mbt_author_priorities_init');
+	add_action('admin_enqueue_scripts', 'mbt_enqueue_taxonomy_js');
 }
 add_action('mbt_init', 'mbt_taxonomies_init');
+
+function mbt_enqueue_taxonomy_js() {
+	wp_enqueue_script("mbt-taxonomies", plugins_url('js/taxonomies.js', dirname(__FILE__)), array('jquery'));
+}
 
 function mbt_register_taxonomies()
 {
@@ -110,7 +116,7 @@ function mbt_override_taxonomy_parent_files() {
 /* Custom Images for Taxonomies                            */
 /*---------------------------------------------------------*/
 
-function mbt_taxonomy_editors_init() {
+function mbt_taxonomy_images_init() {
 	add_filter('mbt_author_edit_form_fields', 'mbt_add_taxonomy_image_edit_form');
 	add_filter('mbt_author_add_form_fields', 'mbt_add_taxonomy_image_add_form');
 	add_action('edited_mbt_author', 'mbt_save_taxonomy_image_edit_form');
@@ -135,7 +141,7 @@ function mbt_taxonomy_editors_init() {
 function mbt_add_taxonomy_image_edit_form() {
 ?>
 	<tr class="form-field">
-		<th scope="row" valign="top"><label for="mbt_tax_image_url"><?php _e('Image', 'mybooktable') ?></label></th>
+		<th><label for="mbt_tax_image_url"><?php _e('Image', 'mybooktable') ?></label></th>
 		<td>
 			<input type="text" id="mbt_tax_image_url" name="mbt_tax_image_url" value="<?php echo(mbt_get_taxonomy_image($_REQUEST['taxonomy'], $_REQUEST['tag_ID'])); ?>" />
 			<input id="mbt_upload_tax_image_button" type="button" class="button" value="<?php _e('Upload', 'mybooktable'); ?>" />
@@ -163,5 +169,58 @@ function mbt_save_taxonomy_image_edit_form() {
 function mbt_save_taxonomy_image_add_form($term_id) {
 	if(!empty($_REQUEST['taxonomy']) and !empty($_REQUEST['mbt_tax_image_url'])) {
 		mbt_save_taxonomy_image($_REQUEST['taxonomy'], $term_id, $_REQUEST['mbt_tax_image_url']);
+	}
+}
+
+
+
+/*---------------------------------------------------------*/
+/* Author Priority Sorting                                 */
+/*---------------------------------------------------------*/
+
+function mbt_author_priorities_init() {
+	add_filter('mbt_author_edit_form_fields', 'mbt_add_author_priority_edit_form');
+	add_filter('mbt_author_add_form_fields', 'mbt_add_author_priority_add_form');
+	add_action('edited_mbt_author', 'mbt_save_author_priority_edit_form');
+	add_action('created_mbt_author', 'mbt_save_author_priority_add_form');
+}
+
+function mbt_add_author_priority_edit_form() {
+?>
+	<tr class="form-field">
+		<th><label for="mbt_author_priority"><?php _e('Priority', 'mybooktable') ?></label></th>
+		<td>
+			<input type="text" id="mbt_author_priority" name="mbt_author_priority" value="<?php echo(mbt_get_author_priority($_REQUEST['tag_ID'])); ?>" />
+			<div id="mbt_author_priority_slider"></div>
+			<div id="mbt_author_priority_display"></div>
+			<div style="clear:both"></div>
+			<p class="description">Authors with higher priority will be shown first in the list of authors when a book has multiple authors.</p>
+		</td>
+	</tr>
+<?php
+}
+
+function mbt_add_author_priority_add_form() {
+?>
+	<div class="form-field">
+		<label for="mbt_author_priority"><?php _e('Priority', 'mybooktable') ?></label>
+		<input type="text" id="mbt_author_priority" name="mbt_author_priority" value="<?php echo(mbt_get_author_priority($_REQUEST['tag_ID'])); ?>" />
+		<div id="mbt_author_priority_slider"></div>
+		<div id="mbt_author_priority_display"></div>
+		<div style="clear:both"></div>
+		<p class="description">Authors with higher priority will be shown first in the list of authors when a book has multiple authors.</p>
+	</div>
+<?php
+}
+
+function mbt_save_author_priority_edit_form() {
+	if(isset($_REQUEST['taxonomy']) and isset($_REQUEST['tag_ID']) and isset($_REQUEST['mbt_author_priority'])) {
+		mbt_save_author_priority($_REQUEST['tag_ID'], $_REQUEST['mbt_author_priority']);
+	}
+}
+
+function mbt_save_author_priority_add_form($term_id) {
+	if(isset($_REQUEST['taxonomy']) and isset($_REQUEST['mbt_author_priority'])) {
+		mbt_save_author_priority($term_id, $_REQUEST['mbt_author_priority']);
 	}
 }
