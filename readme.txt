@@ -1,4 +1,4 @@
-=== MyBookTable - WordPress Bookstore by Author Media ===
+=== MyBookTable Bookstore by Author Media ===
 Contributors: authormedia, zookatron, neovita
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6UGSUCSKP4NS
 Tags: book, books, ecommerce, affiliate, store, author plugin, amazon, ibooks, iTunes, smashwords, goodreads, gumroad
@@ -196,6 +196,9 @@ No! This plugin would work great for anyone wanting to have an Amazon Affiliate 
 5. The image shows the admin interface for the Books page. This is list or index of all your books. You can arrange the order via drag and drop by clicking on “sort books”.
 
 == Upgrade Notice ==
+
+= 2.0.1 =
+After this update, you will need to update any MyBookTable Add-ons that you have installed.
 
 = 1.3.0 =
 This version fixes several bugs and adds GetNoticed theme integration.
