@@ -3,7 +3,7 @@ Contributors: authormedia, zookatron, neovita
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K6UGSUCSKP4NS
 Tags: book, books, ecommerce, affiliate, store, author plugin, amazon, ibooks, iTunes, smashwords, goodreads, gumroad
 Requires at least: 3.5.0
-Tested up to: 4.1.1
+Tested up to: 4.2.0
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -78,7 +78,7 @@ Have a a lot of buy buttons cluttering up your book pages? No worries. MyBookTab
 = Featured Book Widget =
 Feature a book on your sidebar with just a few clicks. You can even add multiple books by adding multiple widgets.
 
-=  Mobile Responsive =
+= Mobile Responsive =
 If your WordPress theme is mobile responsive, MyBookTable will react similarly, delivering maximum compatibility for visitors on phones and tablets.
 
 = Recommend Books (New in 2.0) =
@@ -156,22 +156,23 @@ The following buy buttons are available with the Professional & Developer Upgrad
 
 == Installation ==
 
-= Old-Fashioned FTP Method =
-1. Download the mybooktable.zip from the WordPress plugin repository.
-2. Open the zip to a directory named mybooktbale. This should happen automatically by double clicking the zip file.
-3. Upload the mybooktable directory to the /wp-content/plugins/ directory of your site, using your favorite FTP client.
+= Repository Crossload Method (Recommended) =
+1. Log in to your WordPress Dashboard then go to Plugins -> Add New -> Search
+2. Search for "MyBookTable"
+3. Click “Install”
 4. Click “Activate” under the the plugin on the 'Plugins' menu in WordPress.
+5. Follow the instructions at the top of the dashboard. 
 
 = Zip Upload Method =
-1. Download the mybooktable.zip from the WordPress plugin repository.
+1. Download the mybooktable.zip from the WordPress.org plugin repository.
 2. In your WordPress Dashboard go to Plugins -> Add New -> Upload
 3. Select "choose file", select mybooktable.zip, and click “install now”
 4. Click “Activate” under the the plugin on the 'Plugins' menu in WordPress.
 
-= Repository Crossload Method (Recommended) =
-1. In your WordPress Dashboard go to Plugins -> Add New -> Search
-2. Search for MyBookTable then click install
-3. Click “Install”
+= Old-Fashioned FTP Method (Advanced) =
+1. Download the mybooktable.zip from the WordPress plugin repository.
+2. Open the zip to a directory named mybooktbale. This should happen automatically by double clicking the zip file.
+3. Upload the mybooktable directory to the /wp-content/plugins/ directory of your site, using your favorite FTP client.
 4. Click “Activate” under the the plugin on the 'Plugins' menu in WordPress.
 
 == Frequently Asked Questions ==
@@ -210,6 +211,11 @@ This version adds several cool new features, including "Publisher" and "Publicat
 This version adds **many** new buy button options, including Apple iBooks & Sony Reader.
 
 == Changelog ==
+
+= 2.1.1 =
+* Improved localization support
+* Added new shortcode display mode for books to just show the book Buy Buttons
+* Various bug fixes
 
 = 2.1.0 =
 * Added iTunes Affiliate Integration
