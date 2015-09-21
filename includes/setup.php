@@ -118,11 +118,16 @@ function mbt_rewrites_check_init() {
 add_action('mbt_init', 'mbt_rewrites_check_init');
 
 function mbt_rewrites_check() {
-	if(!mbt_check_rewrites()) { flush_rewrite_rules(); }
-	if(!mbt_check_rewrites()) { add_action('admin_notices', 'mbt_rewrites_check_admin_notice'); }
+	if(!mbt_check_rewrites()) {
+		flush_rewrite_rules();
+		if(!mbt_check_rewrites()) { add_action('admin_notices', 'mbt_rewrites_check_admin_notice'); }
+	}
 }
 
 function mbt_check_rewrites() {
+	global $pagenow;
+	if($pagenow == 'options-permalink.php' and !empty($_GET["settings-updated"])) { return true; }
+
 	global $wp_rewrite;
 	$rules = $wp_rewrite->wp_rewrite_rules();
 	if(empty($rules) or !is_array($rules)) { return true; }
@@ -140,9 +145,13 @@ function mbt_check_rewrites() {
 function mbt_check_tax_rewrites($rules, $tax) {
 	$terms = get_terms($tax);
 	if(empty($terms)) { return true; }
+
+	$parts = parse_url(home_url('/'));
+	$default_path = $parts['path'];
 	$parts = parse_url(get_term_link(reset($terms), $tax));
 	$url = $parts['path'];
-	if($url[0] === '/') { $url = substr($url, 1); }
+	$url = substr($url, strlen($default_path));
+
 	return mbt_get_rewrite($rules, $url) === 'index.php?'.$tax.'=$matches[1]';
 }
 
